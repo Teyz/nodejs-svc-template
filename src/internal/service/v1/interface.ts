@@ -1,0 +1,3 @@
+interface ExampleStoreService {
+    getHello(): Hello;
+}

@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  nodejs-svc-template-app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+        - DB_USER=root
+        - DB_PASSWORD=root
+        - DB_NAME=nodejs-svc-template-db
+        - DB_HOST=nodejs-svc-template-db
+        - DB_PORT=5432
+        - HTTP_SERVER_PORT=3000
+        - SERVICE_NAME=nodejs-svc-template
+        - ENVIRONMENT=local
+    depends_on:
+      - nodejs-svc-template-db
+
+  nodejs-svc-template-db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: nodejs-svc-template-db
+    ports:
+      - "5432:5432"
+
