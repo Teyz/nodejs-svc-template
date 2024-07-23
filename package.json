@@ -4,7 +4,8 @@
   "description": "A NodeJS template for micro-service.",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/cmd/index.ts"
+    "start": "ts-node src/cmd/index.ts",
+    "migrate": "node-pg-migrate"
   },
   "repository": "https://github.com/Teyz/nodejs-svc-template",
   "author": "Bastien Rigaud",
@@ -13,7 +14,9 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/morgan": "^1.9.9",
+    "@types/node-pg-migrate": "^2.3.1",
     "@types/pg": "^8.11.6",
+    "node-pg-migrate": "^7.5.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
   },

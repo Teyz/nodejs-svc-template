@@ -1,8 +1,10 @@
+import { Hello } from "../../../../../entities/example/v1/hello";
 import { Service } from "../../../../../service/v1/init"
-import { HelloResponse } from "./interface";
+import { getHello } from "./hello";
 
 interface Handler {
 	service: Service;
+    getHello(): Promise<Hello>;
 }
 
 class HandlerImpl implements Handler {
@@ -12,23 +14,9 @@ class HandlerImpl implements Handler {
         this.service = service;
     }
 
-    async getHello(req: Request, res: Response): Promise<Response> {
-        try {
-            const game = await this.service.getHello();
-
-            const response: HelloResponse = {
-            game: {
-                id: game.id,
-                songId: game.songId,
-                createdAt: game.createdAt,
-            }
-            };
-
-            return res.status(201).json(NewHTTPResponse(201, MessageSuccess, response));
-        } catch (err) {
-            return res.status(500).json(TranslateError(req.context, err));
-        }
-    }
+    getHello = async (): Promise<Hello> => {
+        return getHello(this.service);
+    };
 }
 
 export function NewHandler(service: Service): Handler {

@@ -1,17 +1,6 @@
-export const getHello = async (service: any): Promise<Response> => {
-    try {
-        const game = await service.createGame();
+import { Hello } from "../../../../../entities/example/v1/hello";
+import { Service } from "../../../../../service/v1/init";
 
-        const response: CreateGameResponse = {
-        game: {
-            id: game.id,
-            songId: game.songId,
-            createdAt: game.createdAt,
-        }
-        };
-
-        return res.status(201).json(NewHTTPResponse(201, MessageSuccess, response));
-    } catch (err) {
-        return res.status(500).json(TranslateError(req.context, err));
-    }
+export const getHello = async (service: Service): Promise<Hello> => {
+    return await service.getHello();
 };

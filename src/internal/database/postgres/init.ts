@@ -3,6 +3,7 @@ import pg from 'pg'
 
 import { Database } from "../interface";
 import { getHello } from "./hello";
+import { Hello } from "../../entities/example/v1/hello";
 
 type DataPrefix = 'user_';
 
@@ -33,8 +34,8 @@ class DbClientImpl implements dbClient {
         this.connection = connection;
     }
 
-    getHello = (): Hello => {
-        return getHello(this.connection);
+    getHello = async (): Promise<Hello> => {
+        return await getHello(this.connection);
     };
 }
 

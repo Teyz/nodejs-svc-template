@@ -7,6 +7,7 @@ import { HTTPServerConfig } from "../../../pkg/http/config"
 import { Service } from "../../service/v1/init"
 import { logger } from "../../../cmd";
 import { Server } from '../server';
+import { NewHandler } from './private/example/v1/handler';
 
 interface httpServer {
 	router: Express
@@ -39,8 +40,16 @@ class HttpServerImpl implements httpServer {
 			next();
 		});
 
+		const privateHelloV1Handlers = NewHandler(this.service)
+
 		this.router.get('/', (req: Request, res: Response) => {
 			res.send('Hello World!');
+		});
+
+		this.router.get('/test', (req: Request, res: Response) => {
+			privateHelloV1Handlers.getHello().then((data) => {
+				res.send(data).status(200);
+			})
 		});
 	}
 
